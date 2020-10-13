@@ -1,7 +1,7 @@
 <!-- [formGroup] - import { ReactiveFormsModule } from '@angular/forms' !!! -->
 <!-- import {MatInputModule} from '@angular/material/input'; -->
 <!-- matInput  i INPUT obavezan -->
-<form [formGroup]="formdata" class="noraml-form">
+<form [formGroup]="formdata" class="noraml-form" (submit)="onSubmit()">
   <mat-grid-list cols="2" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
@@ -22,10 +22,10 @@
         <mat-form-field appearance="fill">
           <mat-label>Mob*</mat-label>
           <input formControlName="mobile" matInput>
-          <mat-error *ngIf="seviceZaposlenici.formdata.controls['mobile'].errors?.required">
+          <mat-error *ngIf="serviceZaposlenici.formdata.controls['mobile'].errors?.required">
             This field is mandatory.
           </mat-error>
-          <mat-error *ngIf="seviceZaposlenici.formdata.controls['mobile'].errors?.minlength">
+          <mat-error *ngIf="serviceZaposlenici.formdata.controls['mobile'].errors?.minlength">
             Minimum 8 characters needed.
           </mat-error>
         </mat-form-field>
@@ -47,13 +47,34 @@
           </mat-radio-group>
         </div>
         <!-- import { MatSelectModule } from '@angular/material/select'; -->
+
         <mat-form-field>
-          <mat-select formControlName="odjel" placeholder="Odjel">
-            <mat-option *ngFor="let data of odjeli" [value]="data.id">
-              {{data.viewValue}}
+          <mat-select formControlName="odjel" placeholder="Odjel iz polja">
+            <mat-option *ngFor="let odjel of odjeli" [value]="odjel.id">
+              {{odjel.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="odjel" placeholder="Odjel iz Baze">
+            <mat-option *ngFor="let odjel of odjelService.array" [value]="odjel.$key">
+              {{odjel.code}} - {{odjel.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <!-- <mat-form-field>
+          <mat-select formControlName="odjel" placeholder="odjel">
+            <mat-option>None</mat-option>
+            <ng-container *ngFor="let odjel of odjelService.array">
+              <mat-option value="{{odjel.$key}}">
+                {{odjel.code}}-{{odjel.name}}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field> -->
 
         <!-- import { MatDatepickerModule } from '@angular/material/datepicker'; -->
         <!-- import { MatNativeDateModule } from '@angular/material/core'; -->
@@ -65,21 +86,15 @@
         </mat-form-field>
 
         <div class="boja">
-          <mat-checkbox formControlName="stalnoZaposlenja" class="boja">Stalni Zaposlenik</mat-checkbox>
+          <mat-checkbox formControlName="stalnoZaposlenje" class="boja">Stalni Zaposlenik</mat-checkbox>
           <!-- <mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox> -->
         </div>
 
         <div class="button-row">
-          <button mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="seviceZaposlenici.formdata.invalid"
-          (click)="onVidi()">
+          <button mat-raised-button color="primary" type="submit" [disabled]="serviceZaposlenici.formdata.invalid">
             Potvrdi
           </button>
-          <button mat-raised-button
-          color="warn" type="submit"
-          (click)="onClear()">
+          <button mat-raised-button color="warn" type="submit" (click)="onClear()">
             Obriši
           </button>
         </div>

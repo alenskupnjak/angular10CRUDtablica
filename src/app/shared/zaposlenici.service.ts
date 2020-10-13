@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ZaposleniciService {
-  constructor() {}
+
+  constructor(
+    private firebase: AngularFireDatabase,
+    private datePipe: DatePipe
+    ) {}
+
+    zaposlenici: AngularFireList<any>;
 
   formdata: FormGroup = new FormGroup({
     // $ zbci da je unique- vrijednost
@@ -17,10 +25,8 @@ export class ZaposleniciService {
     spol: new FormControl('1'),
     odjel: new FormControl(0),
     datumZaposlenja: new FormControl(''),
-    stalnoZaposlenja: new FormControl(false),
+    stalnoZaposlenje: new FormControl(false),
   });
-
-
 
   initializeFormGroup() {
     this.formdata.setValue({
@@ -32,8 +38,51 @@ export class ZaposleniciService {
       spol: '1',
       odjel: 0,
       datumZaposlenja: '',
-      stalnoZaposlenja: false
+      stalnoZaposlenje: false,
     });
+  }
+
+  dohvatiSveZaposlenike() {
+    this.zaposlenici = this.firebase.list('ang10CRUDtable');
+    return this.zaposlenici.snapshotChanges();
+  }
+
+  insertZaposlenika(zaposlenik) {
+    console.log('xxxxxx',zaposlenik);
+
+    this.zaposlenici.push({
+      ime: zaposlenik.ime,
+      email: zaposlenik.email,
+      mobile: zaposlenik.mobile,
+      grad: zaposlenik.grad,
+      spol: zaposlenik.spol,
+      odjel: zaposlenik.odjel,
+      datumZaposlenja:
+        zaposlenik.datumZaposlenja == ''
+          ? ''
+          : this.datePipe.transform(zaposlenik.datumZaposlenja, 'yyyy-MM-dd'),
+      stalnoZaposlenje: zaposlenik.stalnoZaposlenje,
+    });
+  }
+
+  updateZaposlenika(zaposlenik) {
+    this.zaposlenici.update(zaposlenik.$key, {
+      ime: zaposlenik.ime,
+      email: zaposlenik.email,
+      mobile: zaposlenik.mobile,
+      grad: zaposlenik.grad,
+      spol: zaposlenik.spol,
+      odjel: zaposlenik.odjel,
+      datumZaposlenja:
+        zaposlenik.datumZaposlenja == ''
+          ? ''
+          : this.datePipe.transform(zaposlenik.datumZaposlenja, 'yyyy-MM-dd'),
+      stalnoZaposlenje: zaposlenik.stalnoZaposlenje,
+    });
+  }
+
+  deleteZaposlenika($key: string) {
+    this.zaposlenici.remove($key);
   }
 
   getData() {

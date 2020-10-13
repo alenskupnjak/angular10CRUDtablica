@@ -32,4 +32,11 @@ mat-radio-group mat-radio-button {
   margin: 10px;
 }
 
+/* notification */
+snack-bar-container.success {
+  background-color: #5cb85c;
+  color: #fff;
+  border-left: 4px solid red;
+}
+
 
