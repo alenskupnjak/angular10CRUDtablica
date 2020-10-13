@@ -1,47 +1,56 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
     CommonModule,
     MatToolbarModule,
-    // Material.MatGridListModule,
-    // Material.MatFormFieldModule,
-    // Material.MatInputModule,
-    // Material.MatRadioModule,
-    // Material.MatSelectModule,
-    // Material.MatCheckboxModule,
-    // Material.MatDatepickerModule,
-    // Material.MatNativeDateModule,
-    // Material.MatButtonModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
     // Material.MatSnackBarModule,
     // Material.MatTableModule,
     // Material.MatIconModule,
     // Material.MatPaginatorModule,
     // Material.MatSortModule,
-    // Material.MatDialogModule,
     // Material.MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
-    // Material.MatGridListModule,
-    // Material.MatFormFieldModule,
-    // Material.MatInputModule,
-    // Material.MatRadioModule,
-    // Material.MatSelectModule,
-    // Material.MatCheckboxModule,
-    // Material.MatDatepickerModule,
-    // Material.MatNativeDateModule,
-    // Material.MatButtonModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
     // Material.MatSnackBarModule,
     // Material.MatTableModule,
     // Material.MatIconModule,
     // Material.MatPaginatorModule,
     // Material.MatSortModule,
-    // Material.MatDialogModule,
     // Material.MatProgressSpinnerModule
   ],
-  declarations: [],
 })
 export class MaterialModule {}

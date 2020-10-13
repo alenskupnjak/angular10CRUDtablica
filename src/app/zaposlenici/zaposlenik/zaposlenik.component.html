@@ -1,1 +1,92 @@
-<p>zaposlenik works!</p>
+<!-- [formGroup] - import { ReactiveFormsModule } from '@angular/forms' !!! -->
+<!-- import {MatInputModule} from '@angular/material/input'; -->
+<!-- matInput  i INPUT obavezan -->
+<form [formGroup]="formdata" class="noraml-form">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key">
+        <!-- import { MatFormFieldModule } from '@angular/material/form-field'; -->
+        <mat-form-field appearance="fill">
+          <mat-label>Ime*</mat-label>
+          <input formControlName="ime" matInput>
+          <mat-error>Ime je obavezno</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput>
+          <mat-error>Email je obavezan</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Mob*</mat-label>
+          <input formControlName="mobile" matInput>
+          <mat-error *ngIf="seviceZaposlenici.formdata.controls['mobile'].errors?.required">
+            This field is mandatory.
+          </mat-error>
+          <mat-error *ngIf="seviceZaposlenici.formdata.controls['mobile'].errors?.minlength">
+            Minimum 8 characters needed.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Grad</mat-label>
+          <input formControlName="grad" matInput>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div class="add-bottom-padding">
+          <mat-radio-group formControlName="spol" aria-label="Select an option">
+            <mat-radio-button value="1">Muški</mat-radio-button>
+            <mat-radio-button value="2">Ženski</mat-radio-button>
+            <mat-radio-button value="3">Ostalo</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <!-- import { MatSelectModule } from '@angular/material/select'; -->
+        <mat-form-field>
+          <mat-select formControlName="odjel" placeholder="Odjel">
+            <mat-option *ngFor="let data of odjeli" [value]="data.id">
+              {{data.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- import { MatDatepickerModule } from '@angular/material/datepicker'; -->
+        <!-- import { MatNativeDateModule } from '@angular/material/core'; -->
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput formControlName="datumZaposlenja" [matDatepicker]="picker" placeholder="Upisi datum">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="boja">
+          <mat-checkbox formControlName="stalnoZaposlenja" class="boja">Stalni Zaposlenik</mat-checkbox>
+          <!-- <mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox> -->
+        </div>
+
+        <div class="button-row">
+          <button mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="seviceZaposlenici.formdata.invalid"
+          (click)="onVidi()">
+            Potvrdi
+          </button>
+          <button mat-raised-button
+          color="warn" type="submit"
+          (click)="onClear()">
+            Obriši
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+
+    <!-- <mat-grid-tile>3</mat-grid-tile> -->
+    <!-- <mat-grid-tile>4</mat-grid-tile> -->
+  </mat-grid-list>
+</form>
