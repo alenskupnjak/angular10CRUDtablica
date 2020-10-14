@@ -83,6 +83,7 @@ export class ListaZaposlenikaComponent implements OnInit {
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
+
   // ciscenje filter polja
   onSearchClear() {
     this.searchKey = '';
@@ -103,9 +104,9 @@ export class ListaZaposlenikaComponent implements OnInit {
     //   });
   }
 
+  // editiranje zaposlenika
   onEdit(row) {
     console.log('onEdit(row), podaci iz forme=', row);
-
     this.serviceZaposlenici.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

@@ -37,22 +37,33 @@ mat-radio-group mat-radio-button {
   margin: 10px;
 }
 
+
 /* notification */
 snack-bar-container.success {
   background-color: #5cb85c;
   color: #fff;
-  border-left: 4px solid red;
 }
 
+snack-bar-container.warn {
+  background-color: #f99157;
+  color: #fff;
+}
+
+snack-bar-container.notification simple-snack-bar {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+
+/* END notification */
 
 /* mat-table */
 mat-footer-row mat-footer-cell {
   justify-content: center;
   font-style: italic;
-}
-
-.hide {
-  display: none;
 }
 
 
