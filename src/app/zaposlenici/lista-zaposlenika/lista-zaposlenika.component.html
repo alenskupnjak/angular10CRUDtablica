@@ -1,7 +1,7 @@
 <div class="search-div">
-  <!-- <button mat-raised-button (click)="onCreate()">
+  <button mat-raised-button (click)="onCreate()">
     <mat-icon>add</mat-icon>Create
-  </button> -->
+  </button>
 
 
   <mat-form-field class="search-form-field" floatLabel="never">
@@ -56,9 +56,9 @@
     </ng-container>
 
     <!-- Odjel-->
-    <ng-container matColumnDef="odjelime">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Odjel</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.odjelime}}</mat-cell>
+    <ng-container matColumnDef="odjelime" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Odjel</mat-header-cell>
+      <mat-cell *matCellDef="let element" (change)="vidi()" >{{element.odjelime}}</mat-cell>
     </ng-container>
 
     <!-- ACTIONS -->

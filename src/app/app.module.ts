@@ -39,6 +39,7 @@ import { ListaZaposlenikaComponent } from './zaposlenici/lista-zaposlenika/lista
   ],
   providers: [ZaposleniciService, OdjelService, DatePipe],
   bootstrap: [AppComponent],
+  // entryComponents: [ZaposlenikComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

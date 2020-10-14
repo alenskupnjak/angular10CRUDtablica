@@ -7,7 +7,6 @@
   background-color: blue;
 }
 
-snack-bar-container {
-  background-color: blue !important;
-  color:red;
+.toolbar-natpis {
+  margin-bottom: 1rem;
 }

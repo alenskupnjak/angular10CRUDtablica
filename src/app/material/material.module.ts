@@ -23,7 +23,6 @@ import { MatSortModule } from '@angular/material/sort';
     CommonModule,
     MatToolbarModule,
     MatGridListModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -38,11 +37,11 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   exports: [
     MatToolbarModule,
     MatGridListModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -57,6 +56,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

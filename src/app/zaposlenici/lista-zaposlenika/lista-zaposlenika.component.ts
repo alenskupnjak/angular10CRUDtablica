@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ZaposleniciService } from '../../shared/zaposlenici.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { ZaposlenikComponent } from '../../zaposlenici/zaposlenik/zaposlenik.component';
+import { ZaposleniciService } from '../../shared/zaposlenici.service';
 import { OdjelService } from 'src/app/shared/odjel.service';
 import { ObavijestiService } from 'src/app/shared/obavijesti.service';
 
@@ -27,20 +30,19 @@ export class ListaZaposlenikaComponent implements OnInit {
     'odjelime',
     'actions',
   ];
-
   // nužno za rad sortiranja, vidi red **** SORTIRANJE !!!
   @ViewChild(MatSort) sort: MatSort;
-
   // PAGINATOR ,  vidi red *** PAGINATOR !!!
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   // Za filter
   searchKey: string;
 
   constructor(
     public serviceZaposlenici: ZaposleniciService,
     public odjelService: OdjelService,
-    public obavijesti: ObavijestiService
+    public obavijesti: ObavijestiService,
+    // dialog se mora injektirati
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -48,30 +50,32 @@ export class ListaZaposlenikaComponent implements OnInit {
     this.serviceZaposlenici.dohvatiSveZaposlenike().subscribe((list) => {
       let array = list.map((item) => {
         let odjelime = this.odjelService.getImeOdjela(
-          item.payload.val()["odjelSifra"]
+          item.payload.val()['odjelSifra']
         );
         return {
           $key: item.key,
+          // odjelime je ubaceno za potrebe ispisa
+          // jer je u bazi zapisan sifra odjeal, a ne opis
           odjelime: odjelime,
           ...item.payload.val(),
         };
       });
       // stvorena poveznica za tabelu
       this.listData = new MatTableDataSource(array);
-
       // **** SORTIRANJE !!!
       this.listData.sort = this.sort;
-
       // *** PAGINATOR !!!
       this.listData.paginator = this.paginator;
-
-      // this.listData.filterPredicate = (data, filter) => {
-      //   return this.displayedColumns.some((ele) => {
-      //     return (
-      //       ele != "actions" && data[ele].toLowerCase().indexOf(filter) != -1
-      //     );
-      //   });
-      // };
+      // stiti pretraživanje podataka polja koja nisu ispisana
+      this.listData.filterPredicate = (data, filter) => {
+        return this.displayedColumns.some((element) => {
+          // console.log('element',element);
+          return (
+            element != 'actions' &&
+            data[element].toLowerCase().indexOf(filter) != -1
+          );
+        });
+      };
     });
   }
 
@@ -85,11 +89,9 @@ export class ListaZaposlenikaComponent implements OnInit {
     this.applyFilter();
   }
 
-
   onDelete($key) {
-
-          this.serviceZaposlenici.deleteZaposlenika($key);
-          this.obavijesti.warn("! Deleted successfully");
+    this.serviceZaposlenici.deleteZaposlenika($key);
+    this.obavijesti.warn('! Deleted successfully');
     // this.dialogService
     //   .openConfirmDialog("Are you sure to delete this record ?")
     //   .afterClosed()
@@ -99,5 +101,37 @@ export class ListaZaposlenikaComponent implements OnInit {
     //       this.notificationService.warn("! Deleted successfully");
     //     }
     //   });
+  }
+
+  onEdit(row) {
+    console.log('onEdit(row), podaci iz forme=', row);
+
+    this.serviceZaposlenici.populateForm(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    this.dialog.open(ZaposlenikComponent, dialogConfig);
+  }
+
+  onCreate() {
+    // this.serviceZaposlenici.initializeFormGroup();
+    // import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+    // konfigurira window
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    // dialogConfig.height = '70%';
+
+    // import { MatDialog} from '@angular/material/dialog';
+    // injektirati u servis
+    this.dialog.open(ZaposlenikComponent, dialogConfig);
+  }
+
+  vidi(element) {
+    console.log('******');
+
+    console.log(element);
   }
 }

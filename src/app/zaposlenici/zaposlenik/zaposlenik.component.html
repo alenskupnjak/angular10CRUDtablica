@@ -1,7 +1,16 @@
+<mat-toolbar class="toolbar-natpis">
+  <span>{{formdata.controls['$key'].value ? "Izmjeni podatke":"Novi Zaposlenik" }}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+
 <!-- [formGroup] - import { ReactiveFormsModule } from '@angular/forms' !!! -->
 <!-- import {MatInputModule} from '@angular/material/input'; -->
 <!-- matInput  i INPUT obavezan -->
-<form [formGroup]="formdata" class="noraml-form" (submit)="onSubmit()">
+<form [formGroup]="formdata" class="normal-form" (submit)="onSubmit()">
   <mat-grid-list cols="2" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
@@ -48,13 +57,13 @@
         </div>
         <!-- import { MatSelectModule } from '@angular/material/select'; -->
 
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-select formControlName="odjelSifra" placeholder="Odjel iz polja">
             <mat-option *ngFor="let data of odjeli" [value]="data.id">
               {{ data.viewValue }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field>
           <mat-select formControlName="odjelSifra" placeholder="Odjel iz Baze">

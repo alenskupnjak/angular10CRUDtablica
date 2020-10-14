@@ -23,7 +23,7 @@ export class OdjelService {
           ...item.payload.val(),
         };
       });
-      console.log('Odjel polje =' ,this.array);
+      // console.log('Odjel polje =' ,this.array);
     });
   }
 

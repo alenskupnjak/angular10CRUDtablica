@@ -3,19 +3,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { DatePipe } from '@angular/common';
 
-
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ZaposleniciService {
-
   constructor(
     private firebase: AngularFireDatabase,
     private datePipe: DatePipe
-    ) {}
+  ) {}
 
-    zaposlenici: AngularFireList<any>;
+  zaposlenici: AngularFireList<any>;
 
   formdata: FormGroup = new FormGroup({
     // $ zbci da je unique- vrijednost
@@ -86,8 +85,15 @@ export class ZaposleniciService {
     this.zaposlenici.remove($key);
   }
 
-
   getData() {
     return this.formdata;
+  }
+
+  populateForm(zaposlenik) {
+    console.log('opulateForm(zaposlenik) zaposlenik=',zaposlenik);
+    console.log('_omit pulateForm(zaposlenik) zaposlenik=',_.omit(zaposlenik, 'odjelime'));
+
+    // lodash _omit izbacuje zeljenu vrijednost iz polja
+    this.formdata.setValue(_.omit(zaposlenik, 'odjelime'));
   }
 }
