@@ -1,0 +1,88 @@
+<div class="mat-elevation-z8">
+  <!-- poveznica table i podataka -->
+  <mat-table [dataSource]="listData" matSort>
+    <!-- ključni zapis za mat- datatablu , postavlja header za tablicu -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <!-- Ime -->
+    <!-- <ng-container matColumnDef="json">
+      <mat-header-cell *matHeaderCellDef>JSON</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element|json}}</mat-cell>
+    </ng-container> -->
+    <!-- Ime -->
+    <ng-container matColumnDef="ime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ime</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.ime}}</mat-cell>
+    </ng-container>
+
+    <!-- Email-->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+    </ng-container>
+
+    <!-- Mobile-->
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef>Mobile</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.mobile}}</mat-cell>
+    </ng-container>
+
+    <!-- Grad-->
+    <ng-container matColumnDef="grad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Grad</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.grad}}</mat-cell>
+    </ng-container>
+
+    <!-- Odjel-->
+    <ng-container matColumnDef="odjel">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Odjel</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.odjel}}</mat-cell>
+    </ng-container>
+
+    <!-- ACTIONS -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <!-- EDIT -->
+        <button mat-icon-button (click)="onEdit(row)" title='Editiraj podatke'>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <!-- DELETE -->
+        <button mat-icon-button color="warn" (click)="onDelete(row.$key)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+        <!-- Raspolozenje -->
+        <button mat-icon-button color="primary">
+          <mat-icon>mood</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <!-- END actions -->
+
+    <!-- SPINNER  Početak usnimavanja spinner se uključuje-->
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6" class="uploader-status">
+        <mat-spinner></mat-spinner>
+          Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <!-- Ako je lista prazna, uključeuje/ isključuje spinner class="hide"-->
+    <mat-footer-row *matFooterRowDef="['loading']"
+      [ngClass]="{'hide':listData!=null}">
+    </mat-footer-row>
+
+    <!-- Prikazuje DA/NE ovisno ima li podataka u tablici -->
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+       Nema podataka u bazi.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-footer-row *matFooterRowDef="['noData']"
+    [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}">
+    </mat-footer-row>
+  </mat-table>
+    <!-- PAGINATOR -->
+  <mat-paginator [pageSizeOptions]="brojStranica" [pageSize]="5" showFirstLastButtons>
+  </mat-paginator>
+</div>

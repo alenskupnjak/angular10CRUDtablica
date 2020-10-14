@@ -42,6 +42,7 @@ export class ZaposleniciService {
     });
   }
 
+  // iz baze povlači sve podatke
   dohvatiSveZaposlenike() {
     this.zaposlenici = this.firebase.list('ang10CRUDtable');
     return this.zaposlenici.snapshotChanges();

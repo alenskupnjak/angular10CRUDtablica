@@ -40,3 +40,15 @@ snack-bar-container.success {
 }
 
 
+/* mat-table */
+mat-footer-row mat-footer-cell {
+  justify-content: center;
+  font-style: italic;
+}
+
+.hide {
+  display: none;
+}
+
+
+

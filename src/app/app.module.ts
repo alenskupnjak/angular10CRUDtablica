@@ -21,10 +21,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 // nakon otvaranje baze od firebase
 import { environment } from "../environments/environment";
+import { ListaZaposlenikaComponent } from './zaposlenici/lista-zaposlenika/lista-zaposlenika.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ZaposleniciComponent, ZaposlenikComponent],
+  declarations: [AppComponent, ZaposleniciComponent, ZaposlenikComponent, ListaZaposlenikaComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

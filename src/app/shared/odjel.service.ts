@@ -6,6 +6,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 })
 export class OdjelService {
   odjeliList: AngularFireList<any>;
+  // polje kojjim popunjavamo odjel
   array = [];
 
   constructor(private firebase: AngularFireDatabase) {
