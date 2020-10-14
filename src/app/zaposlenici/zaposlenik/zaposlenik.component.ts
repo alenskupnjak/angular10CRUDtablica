@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { MatDialogRef } from '@angular/material/dialog';
-// import { FormControl } from '@angular/forms';
-// import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { ZaposleniciService } from '../../shared/zaposlenici.service';
 import { OdjelService } from '../../shared/odjel.service';
@@ -50,7 +47,7 @@ export class ZaposlenikComponent implements OnInit {
     if (this.formdata.valid) {
       // ako nema $key, insertiramo u bazu
       if (!this.formdata.get('$key').value) {
-        console.log(this.formdata.get('ime').value);
+        // console.log(this.formdata.get('ime').value);
         this.serviceZaposlenici.insertZaposlenika(this.formdata.value);
         this.obavijesti.success('Zapisano u bazu');
       } else {

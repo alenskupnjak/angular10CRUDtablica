@@ -49,15 +49,15 @@
         <!-- import { MatSelectModule } from '@angular/material/select'; -->
 
         <mat-form-field>
-          <mat-select formControlName="odjel" placeholder="Odjel iz polja">
-            <mat-option *ngFor="let odjel of odjeli" [value]="odjel.id">
-              {{odjel.viewValue}}
+          <mat-select formControlName="odjelSifra" placeholder="Odjel iz polja">
+            <mat-option *ngFor="let data of odjeli" [value]="data.id">
+              {{ data.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="odjel" placeholder="Odjel iz Baze">
+          <mat-select formControlName="odjelSifra" placeholder="Odjel iz Baze">
             <mat-option *ngFor="let odjel of odjelService.array" [value]="odjel.$key">
               {{odjel.code}} - {{odjel.name}}
             </mat-option>

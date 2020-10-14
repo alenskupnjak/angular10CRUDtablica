@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
+// import * as _ from 'lodash';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +23,29 @@ export class OdjelService {
           ...item.payload.val(),
         };
       });
-      console.log(this.array);
+      console.log('Odjel polje =' ,this.array);
     });
+  }
+
+  getImeOdjela($key) {
+    if ($key == '0') {
+      return '';
+    } else {
+      let podatak;
+      this.array.forEach((odjel) => {
+        if (odjel.$key === $key) {
+          podatak = odjel.name;
+        }
+      });
+      return podatak;
+
+      // rijesio sam i bez lodash
+      // console.log(
+      //   'tu sam= ',
+      //   _.find(this.array, (obj) => {
+      //     return obj.$key == $key;
+      //   })['name']
+      // );
+    }
   }
 }

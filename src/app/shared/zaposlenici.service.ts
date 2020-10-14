@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { DatePipe } from '@angular/common';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +25,7 @@ export class ZaposleniciService {
     mobile: new FormControl('', [Validators.required, Validators.minLength(5)]),
     grad: new FormControl(''),
     spol: new FormControl('1'),
-    odjel: new FormControl(0),
+    odjelSifra: new FormControl(0),
     datumZaposlenja: new FormControl(''),
     stalnoZaposlenje: new FormControl(false),
   });
@@ -36,7 +38,7 @@ export class ZaposleniciService {
       mobile: '',
       grad: '',
       spol: '1',
-      odjel: 0,
+      odjelSifra: 0,
       datumZaposlenja: '',
       stalnoZaposlenje: false,
     });
@@ -49,15 +51,13 @@ export class ZaposleniciService {
   }
 
   insertZaposlenika(zaposlenik) {
-    console.log('xxxxxx',zaposlenik);
-
     this.zaposlenici.push({
       ime: zaposlenik.ime,
       email: zaposlenik.email,
       mobile: zaposlenik.mobile,
       grad: zaposlenik.grad,
       spol: zaposlenik.spol,
-      odjel: zaposlenik.odjel,
+      odjelSifra: zaposlenik.odjelSifra,
       datumZaposlenja:
         zaposlenik.datumZaposlenja == ''
           ? ''
@@ -73,7 +73,7 @@ export class ZaposleniciService {
       mobile: zaposlenik.mobile,
       grad: zaposlenik.grad,
       spol: zaposlenik.spol,
-      odjel: zaposlenik.odjel,
+      odjelSifra: zaposlenik.odjelSifra,
       datumZaposlenja:
         zaposlenik.datumZaposlenja == ''
           ? ''
@@ -85,6 +85,7 @@ export class ZaposleniciService {
   deleteZaposlenika($key: string) {
     this.zaposlenici.remove($key);
   }
+
 
   getData() {
     return this.formdata;
