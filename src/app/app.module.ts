@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 // nakon otvaranje baze od firebase
 import { environment } from '../environments/environment';
 import { ListaZaposlenikaComponent } from './zaposlenici/lista-zaposlenika/lista-zaposlenika.component';
+import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ListaZaposlenikaComponent } from './zaposlenici/lista-zaposlenika/lista
     ZaposleniciComponent,
     ZaposlenikComponent,
     ListaZaposlenikaComponent,
+    MatConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { ListaZaposlenikaComponent } from './zaposlenici/lista-zaposlenika/lista
   ],
   providers: [ZaposleniciService, OdjelService, DatePipe],
   bootstrap: [AppComponent],
-  // entryComponents: [ZaposlenikComponent],
+  entryComponents: [ZaposlenikComponent, MatConfirmDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

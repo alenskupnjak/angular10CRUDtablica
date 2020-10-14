@@ -95,6 +95,7 @@ mat-footer-row mat-footer-cell {
 
 
 /* mat-confirm-dialog (customised dialog) */
+/* ovdje uredujem svoj dialog box */
 .confirm-dialog-container .mat-dialog-container {
   border-radius: 0.25em 0.25em 0.4em 0.4em;
   padding: 0px;
@@ -116,7 +117,7 @@ mat-footer-row mat-footer-cell {
 .confirm-dialog-container #no-button {
   height: 50px;
   width: 50%;
-  background-color: #fc7169;
+  background-color: #B52E31;
   color: white;
   border-radius: 0px;
 }

@@ -8,6 +8,7 @@ import { ZaposlenikComponent } from '../../zaposlenici/zaposlenik/zaposlenik.com
 import { ZaposleniciService } from '../../shared/zaposlenici.service';
 import { OdjelService } from 'src/app/shared/odjel.service';
 import { ObavijestiService } from 'src/app/shared/obavijesti.service';
+import { DialogService } from 'src/app/shared/dialog.service';
 
 @Component({
   selector: 'app-lista-zaposlenika',
@@ -41,8 +42,8 @@ export class ListaZaposlenikaComponent implements OnInit {
     public serviceZaposlenici: ZaposleniciService,
     public odjelService: OdjelService,
     public obavijesti: ObavijestiService,
-    // dialog se mora injektirati
-    private dialog: MatDialog
+    private dialog: MatDialog, // dialog se mora injektirati
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -90,25 +91,26 @@ export class ListaZaposlenikaComponent implements OnInit {
     this.applyFilter();
   }
 
+  // brišemo zapios iz baze
   onDelete($key) {
-    this.serviceZaposlenici.deleteZaposlenika($key);
-    this.obavijesti.warn('! Deleted successfully');
-    // this.dialogService
-    //   .openConfirmDialog("Are you sure to delete this record ?")
-    //   .afterClosed()
-    //   .subscribe((res) => {
-    //     if (res) {
-    //       this.service.deleteEmployee($key);
-    //       this.notificationService.warn("! Deleted successfully");
-    //     }
-    //   });
+    // this.serviceZaposlenici.deleteZaposlenika($key);
+    // this.obavijesti.warn('! Deleted successfully');
+    this.dialogService
+      .openConfirmDialog('Are you sure to delete this record ?')
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.serviceZaposlenici.deleteZaposlenika($key);
+          this.obavijesti.warn('! Deleted successfully');
+        }
+      });
   }
 
   // editiranje zaposlenika
   onEdit(row) {
     console.log('onEdit(row), podaci iz forme=', row);
     this.serviceZaposlenici.populateForm(row);
-    const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig(); // konfigurira window
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '80%';
@@ -116,10 +118,7 @@ export class ListaZaposlenikaComponent implements OnInit {
   }
 
   onCreate() {
-    // this.serviceZaposlenici.initializeFormGroup();
-    // import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-    // konfigurira window
-    const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig(); // konfigurira window
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '80%';
@@ -127,6 +126,7 @@ export class ListaZaposlenikaComponent implements OnInit {
 
     // import { MatDialog} from '@angular/material/dialog';
     // injektirati u servis
+
     this.dialog.open(ZaposlenikComponent, dialogConfig);
   }
 
