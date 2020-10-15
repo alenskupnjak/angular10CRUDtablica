@@ -99,6 +99,7 @@ export class ListaZaposlenikaComponent implements OnInit {
       .openConfirmDialog('Are you sure to delete this record ?')
       .afterClosed()
       .subscribe((res) => {
+        console.log('res=', res);
         if (res) {
           this.serviceZaposlenici.deleteZaposlenika($key);
           this.obavijesti.warn('! Deleted successfully');

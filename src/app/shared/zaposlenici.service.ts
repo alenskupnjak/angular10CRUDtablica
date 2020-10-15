@@ -85,10 +85,12 @@ export class ZaposleniciService {
     this.zaposlenici.remove($key);
   }
 
+  // povlačimo podatke
   getData() {
     return this.formdata;
   }
 
+  //
   populateForm(zaposlenik) {
     console.log('opulateForm(zaposlenik) zaposlenik=',zaposlenik);
     console.log('_omit pulateForm(zaposlenik) zaposlenik=',_.omit(zaposlenik, 'odjelime'));
