@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start5010": "ng serve --port 5010 -o",
+    "start5010": "ng serve --port 5010 --servePath=angular10CRUDtablica -o",
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
